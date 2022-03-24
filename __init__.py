@@ -2,9 +2,6 @@ from flask import Flask, request
 import os
 import subprocess
 
-# SSL: https://kracekumar.com/post/54437887454/ssl-for-flask-local-development/
-# https://www.tecmint.com/restrict-sftp-user-home-directories-using-chroot/
-
 app = Flask(__name__)
 
 
@@ -29,8 +26,8 @@ def createUser():
     os.system(f"chown {username} /var/sftp/gns_users/chroot/{username}")
     os.system(f"chmod 700 /var/sftp/gns_users/chroot/{username}")
 
-    return "Success!"
+    return "Success!", 200
 
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", debug=False, port=443, ssl_context=("server.crt", "server.key"))
+    app.run(host="0.0.0.0")
